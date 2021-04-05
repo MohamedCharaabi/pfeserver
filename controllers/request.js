@@ -32,6 +32,19 @@ export const getRequests = async (req, res) => {
 }
 
 
+export const getFiltredRequests = async (req, res) => {
+
+    const { filter, word } = req.body;
+
+    try {
+        const requests = await Request.find({ filter: word });
+        res.status(200).json(requests);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+
 export const requestStatus = async (req, res) => {
     const { id } = req.params;
     try {
